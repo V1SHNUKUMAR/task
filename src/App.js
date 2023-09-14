@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Dashboard from "./components/Dashboard";
+import PopUpForm from "./components/PopUpForm";
+import { useContext } from "react";
+import MyContext from "./context/MyContext";
 
 function App() {
+  const context = useContext(MyContext);
+  const { isFormOpen } = context;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* to make the background dark on popup */}
+      {isFormOpen ? (
+        <div className="h-screen w-screen fixed z-20 bg-black/50"></div>
+      ) : null}
+      {/* Pop up form */}
+      {isFormOpen ? <PopUpForm /> : null}
+      <Navbar />
+      <Dashboard />
     </div>
   );
 }
